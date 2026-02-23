@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18K Wine - Vinhos Kosher Premium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a0a0a 0%, #000000 50%, #0d0505 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .age-gate {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 1.5rem;
+        }
+
+        .age-gate.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .age-gate-content {
+            background: #140808;
+            border: 1px solid rgba(212, 175, 118, 0.4);
+            border-radius: 18px;
+            padding: 2rem;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .age-gate-title {
+            font-size: 1.6rem;
+            color: #d4af76;
+            margin-bottom: 0.75rem;
+        }
+
+        .age-gate-text {
+            color: #e8e8e8;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .age-gate-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .age-btn {
+            border-radius: 999px;
+            padding: 0.6rem 1.4rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            border: 1px solid rgba(212, 175, 118, 0.6);
+            background: transparent;
+            color: #d4af76;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .age-btn.primary {
+            background: #d4af76;
+            color: #1a0a0a;
+            border-color: #d4af76;
+        }
+
+        .age-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .main-container {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            padding: 3.5rem 1.5rem 4rem;
+            gap: 2.5rem;
+        }
+
+        .background-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 700px;
+            opacity: 0.06;
+            z-index: 0;
+            background-image: url('public/logo-18k.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(114, 47, 55, 0.15) 0%, rgba(0, 0, 0, 0.8) 70%);
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 20;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .premium-text {
+            color: #d4af76;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .main-headline {
+            margin-bottom: 1.8rem;
+        }
+
+        .headline-celebrate {
+            display: block;
+            color: #ffffff;
+            font-size: 3.2rem;
+            font-weight: 600;
+            line-height: 1;
+            font-family: Georgia, 'Times New Roman', serif;
+            letter-spacing: 0.02em;
+        }
+
+        .headline-vida {
+            display: block;
+            color: #d4af76;
+            font-size: 3.8rem;
+            font-weight: 700;
+            line-height: 1;
+            font-family: Georgia, 'Times New Roman', serif;
+            text-shadow: 0 0 30px rgba(212, 175, 118, 0.4);
+            margin: 0.3rem 0;
+            letter-spacing: 0.05em;
+        }
+
+        .headline-with {
+            display: block;
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: #e8e8e8;
+            font-family: Georgia, 'Times New Roman', serif;
+            margin-top: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .headline-brand {
+            color: #d4af76;
+            font-weight: 400;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            color: #d0d0d0;
+            font-weight: 300;
+            line-height: 1.7;
+            max-width: 750px;
+            margin: 0 auto;
+            letter-spacing: 0.01em;
+        }
+
+        .description-highlight {
+            color: #d4af76;
+            font-weight: 400;
+        }
+
+        .wine-accent {
+            position: absolute;
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, rgba(212, 175, 118, 0.3), transparent);
+            z-index: 15;
+        }
+
+        .accent-1 {
+            top: 20%;
+            left: 15%;
+            transform: rotate(15deg);
+            animation: fadeGlow 4s ease-in-out infinite;
+        }
+
+        .accent-2 {
+            bottom: 25%;
+            right: 18%;
+            transform: rotate(-20deg);
+            animation: fadeGlow 4s ease-in-out infinite 1.5s;
+        }
+
+        .accent-3 {
+            top: 35%;
+            right: 12%;
+            height: 45px;
+            transform: rotate(25deg);
+            animation: fadeGlow 4s ease-in-out infinite 0.8s;
+        }
+
+        @keyframes fadeGlow {
+            0%, 100% { 
+                opacity: 0.2;
+                box-shadow: 0 0 5px rgba(212, 175, 118, 0.2);
+            }
+            50% { 
+                opacity: 0.6;
+                box-shadow: 0 0 15px rgba(212, 175, 118, 0.4);
+            }
+        }
+
+        .decorative-line {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(212, 175, 118, 0.5), transparent);
+            margin: 1.5rem auto;
+        }
+
+        .carousel-section {
+            position: relative;
+            z-index: 20;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .carousel-header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .carousel-title {
+            font-size: 1.1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #d4af76;
+        }
+
+        .carousel-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .tab-pill {
+            border: 1px solid rgba(212, 175, 118, 0.35);
+            color: #f2e6d6;
+            padding: 0.4rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            background: rgba(0, 0, 0, 0.35);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-pill.active,
+        .tab-pill:hover {
+            background: #d4af76;
+            color: #1a0a0a;
+            border-color: #d4af76;
+        }
+
+        .carousel-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .carousel-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(212, 175, 118, 0.6);
+            background: rgba(0, 0, 0, 0.4);
+            color: #d4af76;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-btn:hover {
+            background: #d4af76;
+            color: #1a0a0a;
+        }
+
+        .carousel-track {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: minmax(420px, 650px);
+            gap: 1.6rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-padding: 1rem;
+            padding-bottom: 0.75rem;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(212, 175, 118, 0.6) transparent;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .carousel-track.dragging {
+            cursor: grabbing;
+            scroll-behavior: auto;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .carousel-track::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 118, 0.6);
+            border-radius: 999px;
+        }
+
+        .product-card {
+            position: relative;
+            min-height: 280px;
+            border-radius: 28px;
+            padding: 1.5rem 1.6rem;
+            scroll-snap-align: center;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+            overflow: hidden;
+            transition: transform 0.35s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .card-tag {
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .product-name {
+            margin-top: 0.6rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #ffffff;
+            line-height: 1.1;
+        }
+
+        .product-meta {
+            margin-top: 0.4rem;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .card-cta {
+            display: inline-flex;
+            margin-top: 1rem;
+            padding: 0.45rem 1rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .card-media {
+            position: absolute;
+            right: 8%;
+            bottom: -8%;
+            width: 46%;
+            max-width: 240px;
+            transform: rotate(-6deg);
+            filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.35));
+        }
+
+        .card-media img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .theme-rose {
+            background: linear-gradient(135deg, #f7a6bb 0%, #f47a9a 55%, #ef5f8b 100%);
+        }
+
+        .theme-berry {
+            background: linear-gradient(135deg, #8c2a3d 0%, #b33c52 55%, #d05f6a 100%);
+        }
+
+        .theme-gold {
+            background: linear-gradient(135deg, #f0c986 0%, #d4a75e 55%, #b78946 100%);
+        }
+
+        .theme-olive {
+            background: linear-gradient(135deg, #2f4a3a 0%, #3e6b52 55%, #5b8f6a 100%);
+        }
+
+        @media (max-width: 768px) {
+            .background-logo {
+                width: 500px;
+                height: 500px;
+            }
+            
+            .headline-celebrate {
+                font-size: 2.2rem;
+            }
+            
+            .headline-vida {
+                font-size: 2.8rem;
+            }
+            
+            .headline-with {
+                font-size: 1.3rem;
+            }
+            
+            .description {
+                font-size: 1rem;
+            }
+            
+            .premium-text {
+                font-size: 0.85rem;
+            }
+
+            .carousel-track {
+                grid-auto-columns: minmax(280px, 85%);
+            }
+
+            .carousel-header {
+                grid-template-columns: 1fr;
+                justify-items: center;
+            }
+
+            .carousel-controls {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .background-logo {
+                width: 350px;
+                height: 350px;
+            }
+            
+            .headline-celebrate {
+                font-size: 1.8rem;
+            }
+            
+            .headline-vida {
+                font-size: 2.2rem;
+            }
+            
+            .headline-with {
+                font-size: 1.1rem;
+            }
+            
+            .description {
+                font-size: 0.95rem;
+            }
+            
+            .main-container {
+                padding: 1rem;
+            }
+
+            .carousel-title {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageGateTitle">
+        <div class="age-gate-content">
+            <div class="age-gate-title" id="ageGateTitle">Verificação de Idade</div>
+            <div class="age-gate-text">Você tem idade legal para consumir bebidas alcoólicas?</div>
+            <div class="age-gate-actions">
+                <button class="age-btn primary" id="ageYes" type="button">Sim</button>
+                <button class="age-btn" id="ageNo" type="button">Não</button>
+            </div>
+        </div>
+    </div>
+    <main class="main-container">
+        <!-- Background logo with opacity -->
+        <div class="background-logo"></div>
+        
+        <!-- Gradient overlay -->
+        <div class="gradient-overlay"></div>
+        
+        <!-- Wine accent lines -->
+        <div class="wine-accent accent-1"></div>
+        <div class="wine-accent accent-2"></div>
+        <div class="wine-accent accent-3"></div>
+        
+        <!-- Main content -->
+        <div class="content">
+            
+            <!-- Premium Wine text -->
+            <div>
+                <p class="premium-text">
+                    Vinhos Kosher Premium
+                </p>
+            </div>
+            
+            <div class="decorative-line"></div>
+            
+            <!-- Main headline - COMPACTO -->
+            <div class="main-headline">
+                <h1>
+                    <span class="headline-celebrate">Celebre a</span>
+                    <span class="headline-vida">Vida</span>
+                    <span class="headline-with">
+                        com <span class="headline-brand">18K Wine</span>
+                    </span>
+                </h1>
+            </div>
+            
+            <div class="decorative-line"></div>
+            
+            <!-- Description -->
+            <div>
+                <p class="description">
+                    Tradição, qualidade e sabor em cada taça.<br />
+                    <span class="description-highlight">Vinhos certificados Kosher e Mevushal</span><br />
+                    para momentos especiais.
+                </p>
+            </div>
+        </div>
+
+        <section class="carousel-section" aria-label="Produtos 18K Wine">
+            <div class="carousel-header">
+                <div class="carousel-title">Destaques</div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn" type="button" data-direction="left" aria-label="Voltar">‹</button>
+                    <button class="carousel-btn" type="button" data-direction="right" aria-label="Avançar">›</button>
+                </div>
+            </div>
+            <div class="carousel-tabs" role="tablist" aria-label="Categorias">
+                <button class="tab-pill active" type="button">Destaques</button>
+                <button class="tab-pill" type="button">Vinhos</button>
+                <button class="tab-pill" type="button">Suco</button>
+                <button class="tab-pill" type="button">Espumante</button>
+            </div>
+            <div class="carousel-track" id="productCarousel">
+                <article class="product-card theme-rose">
+                    <div class="card-tag">18K Wine</div>
+                    <h3 class="product-name">Linha Aleph</h3>
+                    <p class="product-meta">Vinhos Kosher e Mevushal</p>
+                    <span class="card-cta">Descobrir</span>
+                    <div class="card-media">
+                        <img src="public/produtos/Vinho-Suave-800.jpg" alt="Vinho 18K Wine">
+                    </div>
+                </article>
+                <article class="product-card theme-berry">
+                    <div class="card-tag">18K Wine</div>
+                    <h3 class="product-name">Tintos Clássicos</h3>
+                    <p class="product-meta">Aromas intensos e elegantes</p>
+                    <span class="card-cta">Descobrir</span>
+                    <div class="card-media">
+                        <img src="public/produtos/Vinho-Seco-800.jpg" alt="Vinho tinto 18K Wine">
+                    </div>
+                </article>
+                <article class="product-card theme-gold">
+                    <div class="card-tag">18K Wine</div>
+                    <h3 class="product-name">Brancos & Frisantes</h3>
+                    <p class="product-meta">Leves, frescos e delicados</p>
+                    <span class="card-cta">Descobrir</span>
+                    <div class="card-media">
+                        <img src="public/produtos/Vinho-Frisante-800.jpg" alt="Vinho frisante 18K Wine">
+                    </div>
+                </article>
+                <article class="product-card theme-olive">
+                    <div class="card-tag">18K Wine</div>
+                    <h3 class="product-name">Branco Seco</h3>
+                    <p class="product-meta">Vinho fino, final elegante</p>
+                    <span class="card-cta">Descobrir</span>
+                    <div class="card-media">
+                        <img src="public/produtos/Vinho-Seco-Branco-800.jpg" alt="Vinho branco 18K Wine">
+                    </div>
+                </article>
+                <article class="product-card theme-berry">
+                    <div class="card-tag">18K Wine</div>
+                    <h3 class="product-name">Suco de Uva</h3>
+                    <p class="product-meta">Integral, natural e kosher</p>
+                    <span class="card-cta">Descobrir</span>
+                    <div class="card-media">
+                        <img src="public/produtos/sucos.jpg" alt="Suco de uva 18K Wine">
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+    <script>
+        const ageGate = document.getElementById('ageGate');
+        const ageYes = document.getElementById('ageYes');
+        const ageNo = document.getElementById('ageNo');
+
+        ageYes.addEventListener('click', () => {
+            ageGate.classList.add('hidden');
+        });
+
+        ageNo.addEventListener('click', () => {
+            if (document.referrer) {
+                window.location.href = document.referrer;
+            } else {
+                window.history.back();
+            }
+        });
+
+        const carousel = document.getElementById('productCarousel');
+        const buttons = document.querySelectorAll('.carousel-btn');
+        const tabs = document.querySelectorAll('.tab-pill');
+
+        let isDown = false;
+        let startX = 0;
+        let scrollLeft = 0;
+
+        buttons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const direction = btn.getAttribute('data-direction');
+                const scrollAmount = carousel.clientWidth * 0.75;
+                carousel.scrollBy({
+                    left: direction === 'right' ? scrollAmount : -scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        tabs.forEach((tab) => {
+            tab.addEventListener('click', () => {
+                tabs.forEach((t) => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        carousel.addEventListener('mousedown', (e) => {
+            isDown = true;
+            carousel.classList.add('dragging');
+            startX = e.pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+        });
+
+        carousel.addEventListener('mouseleave', () => {
+            isDown = false;
+            carousel.classList.remove('dragging');
+        });
+
+        carousel.addEventListener('mouseup', () => {
+            isDown = false;
+            carousel.classList.remove('dragging');
+        });
+
+        carousel.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 1.2;
+            carousel.scrollLeft = scrollLeft - walk;
+        });
+
+        carousel.addEventListener('touchstart', () => {
+            carousel.classList.add('dragging');
+        }, { passive: true });
+
+        carousel.addEventListener('touchend', () => {
+            carousel.classList.remove('dragging');
+        });
+    </script>
+</body>
+</html>
