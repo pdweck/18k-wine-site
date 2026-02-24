@@ -2,16 +2,25 @@
 
 import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { products, categories } from "@/data/products";
+import { products } from "@/data/products";
+import { productsEn } from "@/data/productsEn";
+import { categoriesPt, categoriesEn, type CategoryId } from "@/data/i18n";
 import CarouselNav from "@/components/CarouselNav";
-
-type CategoryId = "vinho" | "suco" | "frisante" | "all";
 
 const AUTOPLAY_INTERVAL = 5000;
 const DRAG_THRESHOLD_PX = 50;
 
-export default function CircularCarousel() {
+interface CircularCarouselProps {
+  /** When "en", uses English products and links to /en/products/[slug] */
+  locale?: "pt" | "en";
+}
+
+export default function CircularCarousel({ locale = "pt" }: CircularCarouselProps) {
   const router = useRouter();
+  const productList = locale === "en" ? productsEn : products;
+  const categoryFilters = locale === "en" ? categoriesEn : categoriesPt;
+  const productLinkBase = locale === "en" ? "/en/products" : "/produto";
+
   const [activeCategory, setActiveCategory] = useState<CategoryId>("all");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
@@ -20,9 +29,9 @@ export default function CircularCarousel() {
   const justDragged = useRef(false);
 
   const filteredProducts = useMemo(() => {
-    if (activeCategory === "all") return products;
-    return products.filter((p) => p.category === activeCategory);
-  }, [activeCategory]);
+    if (activeCategory === "all") return productList;
+    return productList.filter((p) => p.category === activeCategory);
+  }, [activeCategory, productList]);
 
   const totalItems = filteredProducts.length;
 
@@ -100,24 +109,18 @@ export default function CircularCarousel() {
 
   return (
     <section
+      id={locale === "en" ? "products" : "produtos"}
       className="products-section"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
       <div className="category-filters">
-        <button
-          type="button"
-          className={`filter-btn ${activeCategory === "all" ? "active" : ""}`}
-          onClick={() => handleCategoryChange("all")}
-        >
-          Destaques
-        </button>
-        {categories.map((cat) => (
+        {categoryFilters.map((cat) => (
           <button
             key={cat.id}
             type="button"
             className={`filter-btn ${activeCategory === cat.id ? "active" : ""}`}
-            onClick={() => handleCategoryChange(cat.id as CategoryId)}
+            onClick={() => handleCategoryChange(cat.id)}
           >
             {cat.label}
           </button>
@@ -161,8 +164,8 @@ export default function CircularCarousel() {
                     <button
                       type="button"
                       className="carousel-card-discover-hit"
-                      onClick={() => router.push(`/produto/${product.slug}`)}
-                      aria-label={`Descobrir ${product.title}`}
+                      onClick={() => router.push(`${productLinkBase}/${product.slug}`)}
+                      aria-label={locale === "en" ? `Discover ${product.title}` : `Descobrir ${product.title}`}
                     />
                   </div>
                 </div>
@@ -179,8 +182,8 @@ export default function CircularCarousel() {
           onNext={next}
           hasPrev={totalItems > 1}
           hasNext={totalItems > 1}
-          prevLabel="Anterior"
-          nextLabel="Próximo"
+          prevLabel={locale === "en" ? "Previous" : "Anterior"}
+          nextLabel={locale === "en" ? "Next" : "Próximo"}
         />
       </div>
     </section>

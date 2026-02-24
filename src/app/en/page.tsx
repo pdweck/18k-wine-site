@@ -1,60 +1,22 @@
-import Link from "next/link";
-import Image from "next/image";
+import Navbar from "@/components/Navbar";
+import CircularCarousel from "@/components/CircularCarousel";
 import Footer from "@/components/Footer";
 
-export default function EnglishPage() {
+export const metadata = {
+  title: "18k Wine | Premium Kosher Wines & Juice",
+  description:
+    "A complete juice and wine range to be part of the traditions and your daily life. Kosher certified, from the São Francisco Valley, Brazil.",
+};
+
+export default function EnHomePage() {
   return (
-    <>
-      <nav className="navbar">
-        <Link href="/en" className="navbar-logo-link">
-          <Image
-            src="/produtos/logo-100.png"
-            alt="18k Wine"
-            width={80}
-            height={60}
-            className="navbar-logo-img"
-            priority
-          />
-        </Link>
-        
-        <div className="navbar-center">
-          <Link href="/en/about" className="navbar-link">
-            About Us
-          </Link>
-          <Link href="/en/contact" className="navbar-link">
-            Contact
-          </Link>
-        </div>
-        
-        <div className="navbar-right">
-          <Link href="/" className="navbar-lang-btn">
-            Português
-          </Link>
-        </div>
-      </nav>
-
-      <section className="hero-section">
-        <div className="hero-logo">
-          <Image
-            src="/produtos/logo-100.png"
-            alt="18k Wine"
-            width={180}
-            height={140}
-            className="hero-logo-img"
-            priority
-          />
-        </div>
-        <p className="hero-tagline">Premium Kosher Wines</p>
-      </section>
-
-      <section className="products-section">
-        <h2 className="section-title">Coming Soon</h2>
-        <p style={{ textAlign: "center", color: "rgba(255,255,255,0.6)", marginTop: "-1rem" }}>
-          English version under construction
-        </p>
-      </section>
-
-      <Footer />
-    </>
+    <main>
+      <Navbar locale="en" />
+      <p className="hero-tagline en-hero-tagline" style={{ textAlign: "center", paddingTop: "6rem", paddingBottom: "0.5rem", maxWidth: "720px", margin: "0 auto 1rem", fontSize: "clamp(0.9rem, 2vw, 1.05rem)", letterSpacing: "0.12em", color: "rgba(255,255,255,0.7)" }}>
+        A complete juice and wine range to be part of the traditions and your daily life.
+      </p>
+      <CircularCarousel locale="en" />
+      <Footer locale="en" />
+    </main>
   );
 }

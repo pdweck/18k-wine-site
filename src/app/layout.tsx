@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import AgeGate from "@/components/AgeGate";
 
 export const metadata: Metadata = {
   title: "18k Wine | Vinhos Kosher Premium",
@@ -20,7 +21,10 @@ export default function RootLayout({
           rel="stylesheet" 
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <AgeGate />
+        {children}
+      </body>
     </html>
   );
 }
