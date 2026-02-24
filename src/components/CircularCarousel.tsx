@@ -172,8 +172,8 @@ export default function CircularCarousel() {
         </div>
       </div>
 
-      {/* Navegação do carrossel: linha + botões (75px para baixo, 50px para a esquerda) */}
-      <div className="-mt-[125px] ml-[500px] flex justify-center px-2 relative z-50 pointer-events-auto">
+      {/* Navegação do carrossel: linha + botões */}
+      <div className="-mt-[125px] ml-[650px] flex justify-center px-2 relative z-50 pointer-events-auto">
         <CarouselNav
           onPrev={prev}
           onNext={next}
@@ -182,18 +182,6 @@ export default function CircularCarousel() {
           prevLabel="Anterior"
           nextLabel="Próximo"
         />
-      </div>
-
-      <div className="carousel-dots">
-        {filteredProducts.map((_, index) => (
-          <button
-            key={index}
-            type="button"
-            className={`carousel-dot ${index === currentIndex ? "active" : ""}`}
-            onClick={() => goTo(index)}
-            aria-label={`Ir para slide ${index + 1}`}
-          />
-        ))}
       </div>
     </section>
   );

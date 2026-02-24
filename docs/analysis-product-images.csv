@@ -1,0 +1,6 @@
+slug,product_url,card_image_path,product_page_image_path,alt_text_card,alt_text_product_page,og_image,price,notes
+vinho-doce,/produto/vinho-doce,/cards/VinhoTintosuavecard.png,/cards/VinhoTintosuavecard.png,"Vinho Doce — Kiddush","Vinho Doce — Kiddush",/cards/VinhoTintosuavecard.png,,OK
+vinho-branco,/produto/vinho-branco,/cards/Vinhobranco-card.png,/cards/Vinhobranco-card.png,"Vinho Branco — Seco","Vinho Branco — Seco",/cards/Vinhobranco-card.png,,OK
+vinho-seco,/produto/vinho-seco,/cards/Vinhotintoseco-card.png,/cards/Vinhotintoseco-card.png,"Vinho Seco — Tinto","Vinho Seco — Tinto",/cards/Vinhotintoseco-card.png,,OK
+vinho-frisante,/produto/vinho-frisante,/cards/Card_Frisante.png,/cards/Card_Frisante.png,"Vinho Frisante — Espumante","Vinho Frisante — Espumante",/cards/Card_Frisante.png,,OK
+suco-de-uva,/produto/suco-de-uva,/cards/Sucodeuva-card.png,/cards/Sucodeuva-card.png,"Suco de Uva — Natural","Suco de Uva — Natural",/cards/Sucodeuva-card.png,,OK

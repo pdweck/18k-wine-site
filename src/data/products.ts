@@ -4,21 +4,42 @@ export interface Product {
   subtitle: string;
   cardImage: string;
   productImage: string;
+  productPageImage?: string;
+  volume?: string;
   shortDescription: string;
   description: string;
+  descriptionParagraphs?: string[];
+  /** Bullets: benefícios, notas, harmonização (layout Aleph). */
+  bullets?: string[];
+  /** Prova social: citação de avaliação. */
+  reviewQuote?: string;
+  reviewAuthor?: string;
+  /** SEO: título e descrição prioritários para esta página. */
+  seoTitle?: string;
+  seoDescription?: string;
+  /** CTA principal (ex.: texto do botão). */
+  ctaText?: string;
+  /** JSON-LD: preço, SKU, disponibilidade (opcional). */
+  sku?: string;
+  price?: number;
+  priceCurrency?: string;
+  availability?: "InStock" | "OutOfStock";
   category: "vinho" | "suco" | "frisante";
 }
 
 export const products: Product[] = [
   {
     slug: "vinho-doce",
-    title: "Vinho Doce",
-    subtitle: "Kiddush",
+    title: "Vinhos Aleph - Tinto Suave (Kiddush)",
+    subtitle: "",
     cardImage: "/cards/VinhoTintosuavecard.png",
     productImage: "/produtos/vinho-doce-3dbranco.png",
-    shortDescription: "Doçura e tradição para momentos especiais.",
+    productPageImage: "/produtos/vinho-doce-produto.png",
+    volume: "750ml",
+    sku: "ALEPH-TINTO-SUAVE-750",
+    shortDescription: "Vinho tinto suave, ideal para o Kiddush e momentos em família.",
     description:
-      "O Vinho Doce 18k é elaborado com uvas selecionadas, resultando em um vinho tinto suave de alta qualidade. Perfeito para o Kiddush e celebrações tradicionais, apresenta notas frutadas e um final aveludado que encanta o paladar. Certificação Kosher garantida.",
+      "Aleph é um vinho tinto suave de alta qualidade. Um vinho elaborado com uvas selecionadas de um terroir especial do vale de São Francisco no nordeste do Brasil. Aleph é a primeira letra do alfabeto hebraico com uma importante simbologia. Representa a origem de todas as coisas e uma conexão pesada.\n\nEste produto é um vinho fácil de beber, ideal para o Shabat e outras refeições em família. Cada garrafa traz até você um pouco da nossa missão de fazer parte do dia a dia e das tradições da comunidade judaica.",
     category: "vinho",
   },
   {

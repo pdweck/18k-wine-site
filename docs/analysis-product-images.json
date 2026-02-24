@@ -1,0 +1,69 @@
+{
+  "source": "18knovosite project + reference 18kwine.com",
+  "generated_at": "2025-02-23",
+  "base_url_product": "https://www.18kwine.com",
+  "products": [
+    {
+      "slug": "vinho-doce",
+      "product_url": "/produto/vinho-doce",
+      "card_image_path": "/cards/VinhoTintosuavecard.png",
+      "product_page_image_path": "/cards/VinhoTintosuavecard.png",
+      "alt_text_card": "Vinho Doce — Kiddush",
+      "alt_text_product_page": "Vinho Doce — Kiddush",
+      "og_image": "/cards/VinhoTintosuavecard.png",
+      "price": null,
+      "notes": "Card e product page usam a mesma imagem (card). OK."
+    },
+    {
+      "slug": "vinho-branco",
+      "product_url": "/produto/vinho-branco",
+      "card_image_path": "/cards/Vinhobranco-card.png",
+      "product_page_image_path": "/cards/Vinhobranco-card.png",
+      "alt_text_card": "Vinho Branco — Seco",
+      "alt_text_product_page": "Vinho Branco — Seco",
+      "og_image": "/cards/Vinhobranco-card.png",
+      "price": null,
+      "notes": "OK."
+    },
+    {
+      "slug": "vinho-seco",
+      "product_url": "/produto/vinho-seco",
+      "card_image_path": "/cards/Vinhotintoseco-card.png",
+      "product_page_image_path": "/cards/Vinhotintoseco-card.png",
+      "alt_text_card": "Vinho Seco — Tinto",
+      "alt_text_product_page": "Vinho Seco — Tinto",
+      "og_image": "/cards/Vinhotintoseco-card.png",
+      "price": null,
+      "notes": "OK."
+    },
+    {
+      "slug": "vinho-frisante",
+      "product_url": "/produto/vinho-frisante",
+      "card_image_path": "/cards/Card_Frisante.png",
+      "product_page_image_path": "/cards/Card_Frisante.png",
+      "alt_text_card": "Vinho Frisante — Espumante",
+      "alt_text_product_page": "Vinho Frisante — Espumante",
+      "og_image": "/cards/Card_Frisante.png",
+      "price": null,
+      "notes": "OK."
+    },
+    {
+      "slug": "suco-de-uva",
+      "product_url": "/produto/suco-de-uva",
+      "card_image_path": "/cards/Sucodeuva-card.png",
+      "product_page_image_path": "/cards/Sucodeuva-card.png",
+      "alt_text_card": "Suco de Uva — Natural",
+      "alt_text_product_page": "Suco de Uva — Natural",
+      "og_image": "/cards/Sucodeuva-card.png",
+      "price": null,
+      "notes": "OK."
+    }
+  ],
+  "mapping_suggested": {
+    "vinho-doce": "vinho-tintosuavecard.png",
+    "vinho-branco": "vinhobranco-card.png",
+    "vinho-seco": "vinhotintoseco-card.png",
+    "vinho-frisante": "card-frisante.png",
+    "suco-de-uva": "sucodeuva-card.png"
+  }
+}

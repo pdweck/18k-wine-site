@@ -8,6 +8,14 @@
   --gold-dark: #a8894d;
   --black: #000000;
   --white: #ffffff;
+  /* Luxury product page (vinho doce) */
+  --luxury-bg: #0F0A05;
+  --luxury-bg-alt: #1A0F08;
+  --luxury-burgundy: #9B2A1F;
+  --luxury-gold: #D4AF37;
+  --luxury-cream: #F5EDE0;
+  --luxury-neutral: #3A2F2A;
+  --luxury-warm: #EDE4D9;
 }
 
 * {
@@ -237,8 +245,8 @@ body {
 
 /* Card central: no meio, sempre à frente */
 .carousel-card--center {
-  /* sobe só o card do meio em relação aos laterais */
-  transform: translate(-50%, -70%) scale(1) rotate(0deg);
+  /* sobe só o card do meio em relação aos laterais; +20px para baixo */
+  transform: translate(-50%, calc(-70% + 40px)) scale(1) rotate(0deg);
   opacity: 1;
   z-index: 3;
   pointer-events: auto;
@@ -359,6 +367,7 @@ body {
   width: 100%;
   max-width: 100%;
   margin-top: 0.75rem;
+  margin-left: 230px;
   padding: 0 0.5rem;
   display: flex;
   align-items: center;
@@ -396,34 +405,6 @@ body {
 .carousel-scrollbar-arrow:hover {
   border-color: var(--gold);
   color: var(--gold);
-}
-
-/* Carousel Dots - colados ao card, cards mesclados com o site */
-.carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.carousel-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0;
-}
-
-.carousel-dot:hover {
-  background: rgba(255, 255, 255, 0.4);
-}
-
-.carousel-dot.active {
-  background: var(--gold);
-  transform: scale(1.2);
 }
 
 /* Footer */
@@ -539,15 +520,25 @@ body {
 }
 
 .product-image-wrapper {
+  position: relative;
   background: linear-gradient(135deg, #111 0%, #0a0a0a 100%);
   border-radius: 1.5rem;
   padding: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 380px;
+  aspect-ratio: 1248 / 832;
 }
 
-.product-image {
+.product-image-inner {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.product-image-wrapper .product-image {
   max-width: 100%;
   max-height: 450px;
   object-fit: contain;
@@ -587,6 +578,192 @@ body {
 
 .product-source a:hover {
   text-decoration: underline;
+}
+
+/* Layout Aleph — Vinho Suave (duas colunas, painel vinho à direita) */
+.product-page--aleph .product-grid--aleph {
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: 70vh;
+}
+
+@media (max-width: 767px) {
+  .product-page--aleph .product-grid--aleph {
+    grid-template-columns: 1fr;
+  }
+}
+
+.product-page--aleph .product-image-wrapper {
+  border-radius: 0;
+  aspect-ratio: auto;
+  min-height: 70vh;
+}
+
+.product-info--aleph {
+  background: #6b2020;
+  color: #fff;
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Hierarquia visual: título > subtítulo > volume > descrição > bullets > review > CTA */
+.product-info--aleph .product-title,
+.product-info--aleph h1 {
+  color: #d4af37;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+  line-height: 1.25;
+}
+
+.product-info--aleph .product-subtitle {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.product-volume {
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.02em;
+}
+
+.product-description--lead {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 1rem;
+}
+
+.product-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 1.25rem;
+}
+
+.product-bullets li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+}
+
+.product-bullets li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #d4af37;
+  font-weight: bold;
+}
+
+.product-review {
+  margin: 1.25rem 0;
+  padding: 1rem 0;
+  border-left: 3px solid #d4af37;
+  padding-left: 1rem;
+}
+
+.product-review-stars {
+  color: #d4af37;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+}
+
+.product-review-quote {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0.35rem 0 0.25rem;
+}
+
+.product-review-author {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-style: normal;
+}
+
+/* CTA A: outline branco (padrão) */
+.product-cta-button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.9rem 2rem;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  align-self: flex-start;
+}
+
+.product-cta-button:hover {
+  background: #fff;
+  color: #6b2020;
+}
+
+/* CTA B (variação A/B): preenchido dourado — use classe product-cta-button product-cta-button--alt */
+.product-cta-button--alt {
+  background: #d4af37;
+  border-color: #d4af37;
+  color: #1a0a0a;
+}
+
+.product-cta-button--alt:hover {
+  background: #e5c04a;
+  border-color: #e5c04a;
+  color: #1a0a0a;
+}
+
+/* Botão flutuante WhatsApp */
+.whatsapp-float {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  background: #25d366;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-radius: 50px;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.45);
+  z-index: 999;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-float-icon {
+  display: flex;
+}
+
+.whatsapp-float-text {
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .whatsapp-float-text {
+    display: none;
+  }
 }
 
 /* Responsive */
@@ -747,5 +924,291 @@ body {
   .footer-inner {
     flex-direction: column;
     text-align: center;
+  }
+}
+
+/* ========== Luxury Product Page (Vinho Doce) ========== */
+.luxury-product {
+  background: var(--luxury-bg);
+  color: var(--luxury-cream);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.luxury-product .luxury-hero-title,
+.luxury-product .luxury-section-title {
+  font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+}
+
+/* Hero full-viewport */
+.luxury-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.luxury-hero-bg {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+}
+
+.luxury-hero-img {
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.luxury-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 10, 5, 0.4) 0%,
+    rgba(15, 10, 5, 0.75) 50%,
+    rgba(15, 10, 5, 0.95) 100%
+  );
+}
+
+.luxury-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem 1.5rem 4rem;
+  max-width: 720px;
+}
+
+.luxury-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--luxury-cream);
+  opacity: 0.85;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-bottom: 3rem;
+  transition: opacity 0.3s, color 0.3s;
+}
+
+.luxury-back:hover {
+  opacity: 1;
+  color: var(--luxury-gold);
+}
+
+.luxury-back-icon {
+  font-size: 1.1rem;
+}
+
+.luxury-hero-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--luxury-gold);
+  margin-bottom: 0.75rem;
+}
+
+.luxury-hero-title {
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--luxury-cream);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+.luxury-hero-volume {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--luxury-gold);
+  letter-spacing: 0.15em;
+  margin-bottom: 1.25rem;
+}
+
+.luxury-hero-tagline {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(245, 237, 224, 0.9);
+  margin-bottom: 2.5rem;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.luxury-cta--hero {
+  display: inline-block;
+  padding: 1rem 2.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--luxury-bg);
+  background: var(--luxury-gold);
+  border: 1px solid var(--luxury-gold);
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.luxury-cta--hero:hover {
+  background: #e5c04a;
+  color: var(--luxury-bg);
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.35);
+}
+
+/* Sections */
+.luxury-section {
+  padding: 4.5rem 1.5rem;
+}
+
+.luxury-container {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.luxury-section-title {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 500;
+  color: var(--luxury-cream);
+  margin-bottom: 2rem;
+  letter-spacing: 0.02em;
+}
+
+.luxury-prose {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.luxury-prose-p {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: rgba(245, 237, 224, 0.92);
+}
+
+.luxury-essence {
+  background: var(--luxury-bg-alt);
+}
+
+.luxury-tasting-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.luxury-tasting-list li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(245, 237, 224, 0.9);
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.luxury-tasting-list li:last-child {
+  border-bottom: none;
+}
+
+.luxury-tasting-icon {
+  color: var(--luxury-gold);
+  font-size: 0.5rem;
+  flex-shrink: 0;
+}
+
+.luxury-pairing {
+  background: linear-gradient(180deg, var(--luxury-bg-alt) 0%, rgba(27, 15, 8, 0.98) 100%);
+}
+
+.luxury-pairing-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(245, 237, 224, 0.88);
+}
+
+.luxury-cta-block {
+  padding: 4rem 1.5rem 5rem;
+  text-align: center;
+}
+
+.luxury-cta-wrap {
+  max-width: 480px;
+}
+
+.luxury-cta-lead {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--luxury-cream);
+  margin-bottom: 1.5rem;
+}
+
+.luxury-cta--primary {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--luxury-cream);
+  background: transparent;
+  border: 1px solid var(--luxury-gold);
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.luxury-cta--primary:hover {
+  background: rgba(212, 175, 55, 0.12);
+  color: var(--luxury-gold);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+.luxury-cta-note {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: rgba(245, 237, 224, 0.55);
+}
+
+.luxury-cta-note a {
+  color: var(--luxury-gold);
+  text-decoration: none;
+}
+
+.luxury-cta-note a:hover {
+  text-decoration: underline;
+}
+
+/* Scroll-triggered fade-in (CSS only) */
+@media (prefers-reduced-motion: no-preference) {
+  .luxury-section {
+    animation: luxuryFadeIn 0.8s ease-out both;
+  }
+  .luxury-essence { animation-delay: 0.05s; }
+  .luxury-tasting { animation-delay: 0.1s; }
+  .luxury-pairing { animation-delay: 0.15s; }
+  .luxury-cta-block { animation-delay: 0.2s; }
+}
+
+@keyframes luxuryFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .luxury-hero-content {
+    padding: 3rem 2rem 5rem;
+  }
+  .luxury-section {
+    padding: 5.5rem 2rem;
+  }
+  .luxury-cta-block {
+    padding: 5rem 2rem 6rem;
   }
 }
