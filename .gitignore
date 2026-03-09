@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+
+# OS files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# IDE
+.vscode/
+.cursor/
+
+# Temp files
+*.tmp
+*.bak
+scripts/bottle-*.png
+scripts/card_square_template.html
+
+# Large raw photos (keep optimized versions in images/)
+Wine (*.JPG

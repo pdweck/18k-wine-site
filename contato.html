@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Entre em contato com a 18K Wine. Dúvidas, pedidos ou parcerias - nossa equipe está pronta para ajudar.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <title>Contato | 18K Wine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ir para o conteúdo</a>
+    <header class="header">
+        <nav class="nav container">
+            <a href="index.html" class="logo">
+                <img src="images/logo-18kwine.png" alt="18K Wine" class="logo-img">
+            </a>
+            <button class="nav-toggle" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sobre.html">Sobre Nós</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="parceiros.html">Parceiros</a></li>
+                <li><a href="contato.html" class="active">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <nav class="breadcrumb" aria-label="Navegação estrutural">
+            <div class="container">
+                <a href="index.html">Home</a>
+                <span class="separator">/</span>
+                <span>Contato</span>
+            </div>
+        </nav>
+        <section class="page-hero">
+            <div class="container">
+                <span class="section-tag">Fale Conosco</span>
+                <h1>Contato</h1>
+                <p>Nossa equipe está pronta para ajudar. Envie sua mensagem!</p>
+            </div>
+        </section>
+
+        <section class="form-section section">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h2>Informações</h2>
+                        <p>Dúvidas sobre nossos produtos? Interesse em parcerias? Ou simplesmente quer conhecer melhor a 18K Wine?</p>
+                        <p>Preencha o formulário ao lado e responderemos o mais breve possível.</p>
+                        <div class="contact-details">
+                            <p><strong>18K Wine</strong></p>
+                            <p>Vinhos e sucos tropicais do Vale do São Francisco</p>
+                            <p>Produzido no Nordeste do Brasil</p>
+                        </div>
+                    </div>
+                    <form class="form contact-form" id="contact-form" action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Nome *</label>
+                            <input type="text" id="name" name="name" required placeholder="Seu nome">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail *</label>
+                            <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Assunto *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Selecione...</option>
+                                <option value="product">Informações sobre produtos</option>
+                                <option value="partnership">Parceria / Distribuição</option>
+                                <option value="general">Outros assuntos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensagem *</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Como podemos ajudar?"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="images/logo-18kwine.png" alt="18K Wine" class="footer-logo-img">
+                    <p>Vinhos e sucos tropicais do Vale do São Francisco</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="sobre.html">Sobre Nós</a></li>
+                        <li><a href="produtos.html">Produtos</a></li>
+                        <li><a href="parceiros.html">Parceiros</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-certifications">
+                    <h4>Certificações</h4>
+                    <p>Kosher certificado</p>
+                    <p class="terroir">Designação: Vinhos Tropicais</p>
+                </div>
+                <div class="footer-social">
+                    <h4>Redes Sociais</h4>
+                    <div class="social-links">
+                        <a href="https://instagram.com/18kwine" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+                        <a href="https://facebook.com/18kwine" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 18K Wine. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
